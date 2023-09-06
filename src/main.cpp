@@ -1,10 +1,13 @@
 #include <iostream>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
 #include "RenderWindow.h"
+#include "Ball.h"
+#include "Collider.h"
 
 bool init()
 {
@@ -35,11 +38,23 @@ SDL_Event event;
 
 TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
 
+Ball ball(Vector2(0, 0), ballTexture);
+
 void update()
 {
     lastTick = currentTick;
     currentTick = SDL_GetPerformanceCounter();
     deltaTime = (double)((currentTick - lastTick) * 1000 / (double)SDL_GetPerformanceFrequency());
+
+    for (auto &collider : Collider::colliders)
+    {
+        collider->update();
+    }
+
+    for (auto &gameObject : GameObject::gameObjects)
+    {
+        gameObject->update(deltaTime);
+    }
 }
 
 void render()
@@ -48,11 +63,27 @@ void render()
 
     window.render(0, 0, bgTexture);
 
+    for (auto &gameObject : GameObject::gameObjects)
+    {
+        window.render(*gameObject);
+    }
+
     window.display();
+}
+
+void loadPlayers()
+{
+    new Player(Vector2(-150, 100), playerRedTexture, Player::RED_TEAM);
+    new Player(Vector2(-150, -100), playerRedTexture, Player::RED_TEAM);
+    new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
+    new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
+    new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);
+    new Player(Vector2(300, 0), playerBlueTexture, Player::BLUE_TEAM);
 }
 
 int main(int argc, char *argv[])
 {
+    loadPlayers();
 
     while (true)
     {

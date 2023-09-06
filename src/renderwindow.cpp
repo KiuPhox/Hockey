@@ -47,12 +47,13 @@ void RenderWindow::render(GameObject &p_gameObject)
     src.h = p_gameObject.getRect().h;
 
     SDL_Rect dst;
-    dst.x = p_gameObject.getPos().x + (p_gameObject.getRect().w - p_gameObject.getRect().w * p_gameObject.getScale().x) / 2;
-    dst.y = p_gameObject.getPos().y + (p_gameObject.getRect().h - p_gameObject.getRect().h * p_gameObject.getScale().y) / 2;
+    dst.x = p_gameObject.getPos().x - p_gameObject.getRect().w * p_gameObject.getScale().x / 2 + 400;
+    dst.y = p_gameObject.getPos().y - p_gameObject.getRect().h * p_gameObject.getScale().y / 2 + 248;
     dst.w = p_gameObject.getRect().w * p_gameObject.getScale().x;
     dst.h = p_gameObject.getRect().h * p_gameObject.getScale().y;
 
     SDL_RenderCopyEx(renderer, p_gameObject.getTex(), &src, &dst, p_gameObject.getAngle(), 0, SDL_FLIP_NONE);
+    // SDL_RenderDrawRect(renderer, &dst);
 }
 
 void RenderWindow::render(int x, int y, SDL_Texture *p_tex)
@@ -66,8 +67,8 @@ void RenderWindow::render(int x, int y, SDL_Texture *p_tex)
     SDL_QueryTexture(p_tex, NULL, NULL, &src.w, &src.h);
 
     SDL_Rect dst;
-    dst.x = x;
-    dst.y = y;
+    dst.x = x + 400 - src.w / 2;
+    dst.y = y + 248 - src.h / 2;
     dst.w = src.w;
     dst.h = src.h;
 
