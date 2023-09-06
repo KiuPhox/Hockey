@@ -23,6 +23,9 @@ bool SDLinit = init();
 RenderWindow window("Tiny Football", 800, 496);
 
 SDL_Texture *bgTexture = window.loadTexture("assets/images/bg.png");
+SDL_Texture *ballTexture = window.loadTexture("assets/images/ball.png");
+SDL_Texture *playerRedTexture = window.loadTexture("assets/images/player_red.png");
+SDL_Texture *playerBlueTexture = window.loadTexture("assets/images/player_blue.png");
 
 Uint64 currentTick = SDL_GetPerformanceCounter();
 Uint64 lastTick = 0;

@@ -41,16 +41,16 @@ void RenderWindow::clear()
 void RenderWindow::render(GameObject &p_gameObject)
 {
     SDL_Rect src;
-    src.x = p_gameObject.getCurrentFrame().x;
-    src.y = p_gameObject.getCurrentFrame().y;
-    src.w = p_gameObject.getCurrentFrame().w;
-    src.h = p_gameObject.getCurrentFrame().h;
+    src.x = p_gameObject.getRect().x;
+    src.y = p_gameObject.getRect().y;
+    src.w = p_gameObject.getRect().w;
+    src.h = p_gameObject.getRect().h;
 
     SDL_Rect dst;
-    dst.x = p_gameObject.getPos().x + (p_gameObject.getCurrentFrame().w - p_gameObject.getCurrentFrame().w * p_gameObject.getScale().x) / 2;
-    dst.y = p_gameObject.getPos().y + (p_gameObject.getCurrentFrame().h - p_gameObject.getCurrentFrame().h * p_gameObject.getScale().y) / 2;
-    dst.w = p_gameObject.getCurrentFrame().w * p_gameObject.getScale().x;
-    dst.h = p_gameObject.getCurrentFrame().h * p_gameObject.getScale().y;
+    dst.x = p_gameObject.getPos().x + (p_gameObject.getRect().w - p_gameObject.getRect().w * p_gameObject.getScale().x) / 2;
+    dst.y = p_gameObject.getPos().y + (p_gameObject.getRect().h - p_gameObject.getRect().h * p_gameObject.getScale().y) / 2;
+    dst.w = p_gameObject.getRect().w * p_gameObject.getScale().x;
+    dst.h = p_gameObject.getRect().h * p_gameObject.getScale().y;
 
     SDL_RenderCopyEx(renderer, p_gameObject.getTex(), &src, &dst, p_gameObject.getAngle(), 0, SDL_FLIP_NONE);
 }

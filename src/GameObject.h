@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "Math.h"
+#include "Vector2.h"
 
 class GameObject
 {
@@ -25,7 +25,7 @@ public:
     void setAngle(float angle);
 
     SDL_Texture *getTex();
-    SDL_Rect getCurrentFrame();
+    SDL_Rect getRect();
 
     void update(double deltaTime);
 
@@ -33,6 +33,6 @@ private:
     Vector2 pos;
     float angle = 0;
     Vector2 scale = Vector2(1, 1);
-    SDL_Rect currentFrame;
+    SDL_Rect rect;
     SDL_Texture *tex;
 };

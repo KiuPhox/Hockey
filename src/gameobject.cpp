@@ -4,11 +4,11 @@
 
 GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : pos(p_pos), tex(p_tex)
 {
-    currentFrame.x = 0;
-    currentFrame.y = 0;
-    currentFrame.w = 32;
-    currentFrame.h = 32;
-    SDL_QueryTexture(p_tex, NULL, NULL, &currentFrame.w, &currentFrame.h);
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 32;
+    rect.h = 32;
+    SDL_QueryTexture(p_tex, NULL, NULL, &rect.w, &rect.h);
 }
 
 SDL_Texture *GameObject::getTex()
@@ -37,7 +37,7 @@ void GameObject::setScale(float w, float h)
     scale.y = h;
 }
 
-SDL_Rect GameObject::getCurrentFrame()
+SDL_Rect GameObject::getRect()
 {
-    return currentFrame;
+    return rect;
 }
