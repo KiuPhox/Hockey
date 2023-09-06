@@ -25,12 +25,6 @@ void GameObject::update(double deltaTime)
 {
 }
 
-void GameObject::setPos(float x, float y)
-{
-    pos.x = x;
-    pos.y = y;
-}
-
 void GameObject::setAngle(float p_angle)
 {
     angle = p_angle;
@@ -42,7 +36,6 @@ void GameObject::setScale(float w, float h)
     scale.y = h;
 }
 
-SDL_Rect GameObject::getRect()
+void GameObject::onCollision(GameObject *other)
 {
-    return rect;
 }

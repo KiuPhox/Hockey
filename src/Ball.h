@@ -12,4 +12,7 @@ class Ball : public GameObject
 public:
     Ball(Vector2 p_pos, SDL_Texture *p_tex);
     void update(double deltaTime);
+
+private:
+    void onCollision(GameObject *other);
 };
