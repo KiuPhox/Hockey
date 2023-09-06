@@ -30,6 +30,8 @@ double deltaTime = 0;
 
 SDL_Event event;
 
+TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
+
 void update()
 {
     lastTick = currentTick;
@@ -40,7 +42,9 @@ void update()
 void render()
 {
     window.clear();
+
     window.render(0, 0, bgTexture);
+
     window.display();
 }
 
