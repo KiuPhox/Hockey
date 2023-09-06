@@ -20,7 +20,7 @@ bool init()
 
 bool SDLinit = init();
 
-RenderWindow window("Tiny Football", 496, 800);
+RenderWindow window("Tiny Football", 800, 496);
 
 SDL_Texture *bgTexture = window.loadTexture("assets/images/bg.png");
 

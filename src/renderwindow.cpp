@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "RenderWindow.h"
+#include "GameObject.h"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h) : window(NULL), renderer(NULL)
 {
@@ -37,22 +38,22 @@ void RenderWindow::clear()
     SDL_RenderClear(renderer);
 }
 
-// void RenderWindow::render(Entity &p_entity)
-// {
-//     SDL_Rect src;
-//     src.x = p_entity.getCurrentFrame().x;
-//     src.y = p_entity.getCurrentFrame().y;
-//     src.w = p_entity.getCurrentFrame().w;
-//     src.h = p_entity.getCurrentFrame().h;
+void RenderWindow::render(GameObject &p_gameObject)
+{
+    SDL_Rect src;
+    src.x = p_gameObject.getCurrentFrame().x;
+    src.y = p_gameObject.getCurrentFrame().y;
+    src.w = p_gameObject.getCurrentFrame().w;
+    src.h = p_gameObject.getCurrentFrame().h;
 
-//     SDL_Rect dst;
-//     dst.x = p_entity.getPos().x + (p_entity.getCurrentFrame().w - p_entity.getCurrentFrame().w * p_entity.getScale().x) / 2;
-//     dst.y = p_entity.getPos().y + (p_entity.getCurrentFrame().h - p_entity.getCurrentFrame().h * p_entity.getScale().y) / 2;
-//     dst.w = p_entity.getCurrentFrame().w * p_entity.getScale().x;
-//     dst.h = p_entity.getCurrentFrame().h * p_entity.getScale().y;
+    SDL_Rect dst;
+    dst.x = p_gameObject.getPos().x + (p_gameObject.getCurrentFrame().w - p_gameObject.getCurrentFrame().w * p_gameObject.getScale().x) / 2;
+    dst.y = p_gameObject.getPos().y + (p_gameObject.getCurrentFrame().h - p_gameObject.getCurrentFrame().h * p_gameObject.getScale().y) / 2;
+    dst.w = p_gameObject.getCurrentFrame().w * p_gameObject.getScale().x;
+    dst.h = p_gameObject.getCurrentFrame().h * p_gameObject.getScale().y;
 
-//     SDL_RenderCopyEx(renderer, p_entity.getTex(), &src, &dst, p_entity.getAngle(), 0, SDL_FLIP_NONE);
-// }
+    SDL_RenderCopyEx(renderer, p_gameObject.getTex(), &src, &dst, p_gameObject.getAngle(), 0, SDL_FLIP_NONE);
+}
 
 void RenderWindow::render(int x, int y, SDL_Texture *p_tex)
 {
@@ -107,8 +108,8 @@ void RenderWindow::renderCenter(float p_x, float p_y, const char *p_text, TTF_Fo
     src.h = surfaceMessage->h;
 
     SDL_Rect dst;
-    dst.x = 496 / 2 - src.w / 2 + p_x;
-    dst.y = 800 / 2 - src.h / 2 + p_y;
+    dst.x = 800 / 2 - src.w / 2 + p_x;
+    dst.y = 496 / 2 - src.h / 2 + p_y;
     dst.w = src.w;
     dst.h = src.h;
 
