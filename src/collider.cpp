@@ -26,8 +26,8 @@ void Collider::update()
 
 bool Collider::checkCollision(Collider *other)
 {
-    Vector2 this_pos = this->gameObject->pos + this->offset;
-    Vector2 other_pos = other->gameObject->pos + other->offset;
+    Vector2 this_pos = this->gameObject->position + this->offset;
+    Vector2 other_pos = other->gameObject->position + other->offset;
 
     if (_type == COLLIDER_RECT && _type == other->_type)
     {

@@ -11,29 +11,16 @@ public:
     static std::vector<GameObject *> gameObjects;
     GameObject(Vector2 p_pos, SDL_Texture *p_tex);
 
+    Vector2 position;
+    float angle = 0;
+    Vector2 scale = Vector2(1, 1);
+
     SDL_Rect rect;
-    Vector2 pos;
-
-    float getAngle()
-    {
-        return angle;
-    }
-    Vector2 getScale()
-    {
-        return scale;
-    }
-    SDL_Texture *getTex();
-
-    void setScale(float w, float h);
-    void setAngle(float angle);
+    SDL_Texture *tex;
 
     void update(double deltaTime);
 
     void onCollision(GameObject *other);
 
 private:
-protected:
-    float angle = 0;
-    Vector2 scale = Vector2(1, 1);
-    SDL_Texture *tex;
 };

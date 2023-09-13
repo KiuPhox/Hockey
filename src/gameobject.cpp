@@ -5,7 +5,7 @@
 
 std::vector<GameObject *> GameObject::gameObjects;
 
-GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : pos(p_pos), tex(p_tex)
+GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : position(p_pos), tex(p_tex)
 {
     gameObjects.push_back(this);
 
@@ -16,24 +16,8 @@ GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : pos(p_pos), tex(p_te
     SDL_QueryTexture(p_tex, NULL, NULL, &rect.w, &rect.h);
 }
 
-SDL_Texture *GameObject::getTex()
-{
-    return tex;
-}
-
 void GameObject::update(double deltaTime)
 {
-}
-
-void GameObject::setAngle(float p_angle)
-{
-    angle = p_angle;
-}
-
-void GameObject::setScale(float w, float h)
-{
-    scale.x = w;
-    scale.y = h;
 }
 
 void GameObject::onCollision(GameObject *other)

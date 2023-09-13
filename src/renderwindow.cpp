@@ -41,18 +41,18 @@ void RenderWindow::clear()
 void RenderWindow::render(GameObject &p_gameObject)
 {
     SDL_Rect src;
-    src.x = p_gameObject.getRect().x;
-    src.y = p_gameObject.getRect().y;
-    src.w = p_gameObject.getRect().w;
-    src.h = p_gameObject.getRect().h;
+    src.x = p_gameObject.rect.x;
+    src.y = p_gameObject.rect.y;
+    src.w = p_gameObject.rect.w;
+    src.h = p_gameObject.rect.h;
 
     SDL_Rect dst;
-    dst.x = p_gameObject.getPos().x - p_gameObject.getRect().w * p_gameObject.getScale().x / 2 + 400;
-    dst.y = p_gameObject.getPos().y - p_gameObject.getRect().h * p_gameObject.getScale().y / 2 + 248;
-    dst.w = p_gameObject.getRect().w * p_gameObject.getScale().x;
-    dst.h = p_gameObject.getRect().h * p_gameObject.getScale().y;
+    dst.x = p_gameObject.position.x - p_gameObject.rect.w * p_gameObject.scale.x / 2 + 400;
+    dst.y = p_gameObject.position.y - p_gameObject.rect.h * p_gameObject.scale.y / 2 + 248;
+    dst.w = p_gameObject.rect.w * p_gameObject.scale.x;
+    dst.h = p_gameObject.rect.h * p_gameObject.scale.y;
 
-    SDL_RenderCopyEx(renderer, p_gameObject.getTex(), &src, &dst, p_gameObject.getAngle(), 0, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(renderer, p_gameObject.tex, &src, &dst, p_gameObject.angle, 0, SDL_FLIP_NONE);
     // SDL_RenderDrawRect(renderer, &dst);
 }
 
