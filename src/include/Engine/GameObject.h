@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Vector2.h"
+#include "Engine/Component.h"
 
 class GameObject
 {
@@ -24,5 +25,11 @@ public:
     virtual void update(double deltaTime);
     virtual void onCollision(GameObject *other);
 
+    void addComponent(Component *component);
+
+    template <typename T>
+    T *getComponent();
+
 private:
+    std::vector<Component *> components;
 };

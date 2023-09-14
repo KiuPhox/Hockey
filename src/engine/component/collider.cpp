@@ -1,28 +1,20 @@
 #include "Engine/Collider.h"
+#include "Engine/GameObject.h"
 
 std::vector<Collider *> Collider::colliders;
 
-Collider::Collider(GameObject *obj, TYPE_COLLIDER type)
+Collider::Collider(GameObject *obj, TYPE_COLLIDER type) : Component(obj)
 {
-    gameObject = obj;
-    _type = type;
+
+    this->type = type;
     this->size = Vector2(obj->rect.w, obj->rect.h);
+    this->radius = 10;
     colliders.push_back(this);
 }
 
-void Collider::update()
+void Collider::update(double deltaTime)
 {
-    for (auto &collider : colliders)
-    {
-        if (collider == this)
-            continue;
-
-        if (checkCollision(collider))
-        {
-            this->gameObject->onCollision(collider->gameObject);
-            collider->gameObject->onCollision(this->gameObject);
-        }
-    }
+    //
 }
 
 bool Collider::checkCollision(Collider *other)
@@ -30,7 +22,7 @@ bool Collider::checkCollision(Collider *other)
     Vector2 this_pos = this->gameObject->position + this->offset;
     Vector2 other_pos = other->gameObject->position + other->offset;
 
-    if (_type == COLLIDER_RECT && _type == other->_type)
+    if (type == COLLIDER_RECT && type == other->type)
     {
 
         if (this_pos.x >= other_pos.x + other->size.x || this_pos.x + size.x <= other_pos.x)
@@ -39,7 +31,7 @@ bool Collider::checkCollision(Collider *other)
             return false;
         return true;
     }
-    else if (_type == COLLIDER_CIRCLE && _type == other->_type)
+    else if (type == COLLIDER_CIRCLE && type == other->type)
     {
         return (this_pos - other_pos).GetLength() >= this->radius + other->radius;
     }
@@ -53,7 +45,7 @@ bool Collider::checkCollision(Collider *other)
         static float dx;
         static float dy;
 
-        if (_type == COLLIDER_CIRCLE)
+        if (type == COLLIDER_CIRCLE)
         {
             rect_half_size = other->size * 0.5f;
             rect_center = other_pos + rect_half_size;

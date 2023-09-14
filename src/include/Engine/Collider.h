@@ -1,20 +1,21 @@
+#pragma once
 #include <vector>
 
 #include "Vector2.h"
-#include "GameObject.h"
+#include "Component.h"
 
-class Collider
+class Collider : public Component
 {
 public:
+    static std::vector<Collider *> colliders;
+
     enum TYPE_COLLIDER
     {
         COLLIDER_RECT,
         COLLIDER_CIRCLE
     };
 
-    static std::vector<Collider *> colliders;
-    GameObject *gameObject = nullptr;
-    TYPE_COLLIDER _type = COLLIDER_RECT;
+    TYPE_COLLIDER type = COLLIDER_RECT;
 
     Collider(GameObject *obj, TYPE_COLLIDER type = COLLIDER_RECT);
 
@@ -22,7 +23,7 @@ public:
     Vector2 offset;
     float radius = 0;
 
-    void update();
+    void update(double deltaTime) override;
 
 private:
     bool checkCollision(Collider *other);

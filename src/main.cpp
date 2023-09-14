@@ -7,6 +7,7 @@
 
 #include "Engine/RenderWindow.h"
 #include "Engine/Collider.h"
+#include "Engine/Physic.h"
 
 #include "Game/Ball.h"
 
@@ -39,16 +40,15 @@ SDL_Event event;
 
 TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
 
+Physic *physic;
+
 void update()
 {
     lastTick = currentTick;
     currentTick = SDL_GetPerformanceCounter();
     deltaTime = (double)((currentTick - lastTick) * 1000 / (double)SDL_GetPerformanceFrequency());
 
-    for (auto &collider : Collider::colliders)
-    {
-        collider->update();
-    }
+    physic->update(deltaTime);
 
     for (auto &gameObject : GameObject::gameObjects)
     {
@@ -79,6 +79,7 @@ void initGame()
     new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
     new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);
     new Player(Vector2(300, 0), playerBlueTexture, Player::BLUE_TEAM);
+    physic = new Physic();
 }
 
 int main(int argc, char *argv[])

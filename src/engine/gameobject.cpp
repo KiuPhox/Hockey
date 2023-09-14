@@ -19,8 +19,29 @@ GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : position(p_pos), tex
 
 void GameObject::update(double deltaTime)
 {
+    for (auto &component : components)
+    {
+        component->update(deltaTime);
+    }
 }
 
 void GameObject::onCollision(GameObject *other)
 {
+}
+
+void GameObject::addComponent(Component *component)
+{
+    //
+}
+
+template <typename T>
+T *GameObject::getComponent()
+{
+    for (auto &component : components)
+    {
+        T *result = dynamic_cast<T *>(component);
+        if (result != nullptr)
+            return result;
+    }
+    return nullptr;
 }
