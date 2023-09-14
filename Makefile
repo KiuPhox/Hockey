@@ -1,7 +1,11 @@
+BUILD_DIR = build
 SOURCE_DIR = src
-SOURCE_FILES := $(wildcard $(SOURCE_DIR)/*.cpp)
-OBJECTS := $(patsubst $(SOURCE_DIR)/%.cpp, %.o, $(SOURCE_FILES))
-EXECUTABLE = main.exe
+SOURCE_FILES := $(wildcard $(SOURCE_DIR)/*.cpp) \
+			   	$(wildcard $(SOURCE_DIR)/game/*.cpp) \
+               	$(wildcard $(SOURCE_DIR)/engine/*.cpp) \
+               	$(wildcard $(SOURCE_DIR)/utils/*.cpp)
+OBJECTS := $(patsubst $(SOURCE_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SOURCE_FILES))
+EXECUTABLE = $(BUILD_DIR)/main.exe
 
 CXX = g++
 CXXFLAGS = -I$(SOURCE_DIR)/include -L$(SOURCE_DIR)/lib
@@ -12,11 +16,11 @@ all: build run
 build: $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(EXECUTABLE) $(OBJECTS) $(LIBS)
 
-%.o: $(SOURCE_DIR)/%.cpp
+$(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 run:
 	./$(EXECUTABLE)
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	del /S /Q build\*.o && del build\*.exe

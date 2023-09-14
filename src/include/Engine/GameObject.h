@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <vector>
+#include <string>
 
 #include "Vector2.h"
 
@@ -12,15 +13,16 @@ public:
     GameObject(Vector2 p_pos, SDL_Texture *p_tex);
 
     Vector2 position;
-    float angle = 0;
     Vector2 scale = Vector2(1, 1);
+
+    float angle = 0;
+    std::string name = "";
 
     SDL_Rect rect;
     SDL_Texture *tex;
 
-    void update(double deltaTime);
-
-    void onCollision(GameObject *other);
+    virtual void update(double deltaTime);
+    virtual void onCollision(GameObject *other);
 
 private:
 };

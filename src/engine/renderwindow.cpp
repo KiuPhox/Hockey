@@ -2,8 +2,8 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-#include "RenderWindow.h"
-#include "GameObject.h"
+#include "Engine/RenderWindow.h"
+#include "Engine/GameObject.h"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h) : window(NULL), renderer(NULL)
 {
@@ -53,7 +53,8 @@ void RenderWindow::render(GameObject &p_gameObject)
     dst.h = p_gameObject.rect.h * p_gameObject.scale.y;
 
     SDL_RenderCopyEx(renderer, p_gameObject.tex, &src, &dst, p_gameObject.angle, 0, SDL_FLIP_NONE);
-    // SDL_RenderDrawRect(renderer, &dst);
+    // Debug
+    SDL_RenderDrawRect(renderer, &dst);
 }
 
 void RenderWindow::render(int x, int y, SDL_Texture *p_tex)

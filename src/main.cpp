@@ -5,9 +5,10 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "RenderWindow.h"
-#include "Ball.h"
-#include "Collider.h"
+#include "Engine/RenderWindow.h"
+#include "Engine/Collider.h"
+
+#include "Game/Ball.h"
 
 bool init()
 {
@@ -37,8 +38,6 @@ double deltaTime = 0;
 SDL_Event event;
 
 TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
-
-Ball ball(Vector2(0, 0), ballTexture);
 
 void update()
 {
@@ -71,8 +70,9 @@ void render()
     window.display();
 }
 
-void loadPlayers()
+void initGame()
 {
+    new Ball(Vector2(0, 0), ballTexture);
     new Player(Vector2(-150, 100), playerRedTexture, Player::RED_TEAM);
     new Player(Vector2(-150, -100), playerRedTexture, Player::RED_TEAM);
     new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
@@ -83,7 +83,7 @@ void loadPlayers()
 
 int main(int argc, char *argv[])
 {
-    loadPlayers();
+    initGame();
 
     while (true)
     {

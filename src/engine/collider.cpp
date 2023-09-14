@@ -1,10 +1,11 @@
-#include "Collider.h"
+#include "Engine/Collider.h"
 
 std::vector<Collider *> Collider::colliders;
 
-Collider::Collider(GameObject *obj)
+Collider::Collider(GameObject *obj, TYPE_COLLIDER type)
 {
     gameObject = obj;
+    _type = type;
     this->size = Vector2(obj->rect.w, obj->rect.h);
     colliders.push_back(this);
 }
@@ -31,11 +32,11 @@ bool Collider::checkCollision(Collider *other)
 
     if (_type == COLLIDER_RECT && _type == other->_type)
     {
+
         if (this_pos.x >= other_pos.x + other->size.x || this_pos.x + size.x <= other_pos.x)
             return false;
         if (this_pos.y >= other_pos.y + other->size.y || this_pos.y + size.y <= other_pos.y)
             return false;
-
         return true;
     }
     else if (_type == COLLIDER_CIRCLE && _type == other->_type)
