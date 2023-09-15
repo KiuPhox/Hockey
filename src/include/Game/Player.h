@@ -15,9 +15,11 @@ public:
     };
 
     TEAM team;
-    Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team);
+
     void update(double deltaTime) override;
+    void setActive(bool active);
+    Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team);
 
 private:
-    bool isActive = false;
+    bool active = false;
 };

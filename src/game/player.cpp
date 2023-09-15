@@ -6,9 +6,18 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
     this->name = "player";
     this->team = team;
     this->angle = (team == RED_TEAM) ? 90 : -90;
-    new Collider(this);
+    this->active = true;
+    new Collider(this, Collider::COLLIDER_CIRCLE);
 }
 
 void Player::update(double deltaTime)
 {
+    GameObject::update(deltaTime);
+
+    // Control player
+}
+
+void Player::setActive(bool active)
+{
+    this->active = active;
 }

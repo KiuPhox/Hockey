@@ -42,25 +42,19 @@ TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
 
 Physic *physic;
 
-void update()
+void update(double deltaTime)
 {
-    lastTick = currentTick;
-    currentTick = SDL_GetPerformanceCounter();
-    deltaTime = (double)((currentTick - lastTick) * 1000 / (double)SDL_GetPerformanceFrequency());
-
     physic->update(deltaTime);
 
-    for (auto &gameObject : GameObject::gameObjects)
+    for (GameObject *obj : GameObject::gameObjects)
     {
-        gameObject->update(deltaTime);
+        obj->update(deltaTime);
     }
 }
 
 void render()
 {
     window.clear();
-
-    window.render(0, 0, bgTexture);
 
     for (auto &gameObject : GameObject::gameObjects)
     {
@@ -72,20 +66,19 @@ void render()
 
 void initGame()
 {
+    new GameObject(Vector2(0, 0), bgTexture);
     new Ball(Vector2(0, 0), ballTexture);
-    new Player(Vector2(-150, 100), playerRedTexture, Player::RED_TEAM);
-    new Player(Vector2(-150, -100), playerRedTexture, Player::RED_TEAM);
-    new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
-    new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
-    new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);
-    new Player(Vector2(300, 0), playerBlueTexture, Player::BLUE_TEAM);
+    new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
+    // new Player(Vector2(-150, -100), playerRedTexture, Player::RED_TEAM);
+    // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
+    // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
+    // new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);
+    // new Player(Vector2(300, 0), playerBlueTexture, Player::BLUE_TEAM);
     physic = new Physic();
 }
 
-int main(int argc, char *argv[])
+void loop()
 {
-    initGame();
-
     while (true)
     {
         if (SDL_PollEvent(&event))
@@ -96,10 +89,19 @@ int main(int argc, char *argv[])
             }
         }
 
-        update();
+        lastTick = currentTick;
+        currentTick = SDL_GetPerformanceCounter();
+        deltaTime = (double)((currentTick - lastTick) / (double)SDL_GetPerformanceFrequency());
+
+        update(double(deltaTime));
         render();
     }
+}
 
+int main(int argc, char *argv[])
+{
+    initGame();
+    loop();
     window.cleanUp();
     SDL_Quit();
 

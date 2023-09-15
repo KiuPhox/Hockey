@@ -31,7 +31,8 @@ void GameObject::onCollision(GameObject *other)
 
 void GameObject::addComponent(Component *component)
 {
-    //
+
+    components.push_back(component);
 }
 
 template <typename T>

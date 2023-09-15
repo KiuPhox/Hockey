@@ -1,6 +1,8 @@
 #include "Engine/Physic.h"
 #include "Engine/GameObject.h"
 
+#include <iostream>
+
 Physic::Physic()
 {
     //
@@ -31,25 +33,32 @@ bool Physic::checkCollision(Collider *collider, Collider *other, double deltaTim
 
     if (collider->type == Collider::COLLIDER_RECT && collider->type == other->type)
     {
-
         if (this_pos.x >= other_pos.x + other->size.x || this_pos.x + collider->size.x <= other_pos.x)
             return false;
         if (this_pos.y >= other_pos.y + other->size.y || this_pos.y + collider->size.y <= other_pos.y)
             return false;
+
         return true;
     }
     else if (collider->type == Collider::COLLIDER_CIRCLE && collider->type == other->type)
     {
-        Vector2 v = this_pos - other_pos;
-        float dist = v.GetLength();
-        if (dist >= collider->radius + other->radius)
-        {
-            Vector2 n = v / dist;
-            float mass_ratio_1 = collider->radius / (collider->radius + other->radius);
-            float mass_ratio_2 = other->radius / (collider->radius + other->radius);
 
-            collider->gameObject->position -= n * (mass_ratio_2 * deltaTime);
-            other->gameObject->position += n * (mass_ratio_1 * deltaTime);
+        Vector2 v = this_pos - other_pos;
+
+        float dist = v.GetLength();
+        float minDist = collider->radius + other->radius;
+
+        if (dist < minDist)
+        {
+            // Vector2 n = v / dist;
+            // float mass_ratio_1 = collider->radius / minDist;
+            // float mass_ratio_2 = other->radius / minDist;
+
+            // float delta = 0.5 * 20 * (dist - minDist);
+
+            // collider->gameObject->position -= n * (mass_ratio_2 * delta);
+            // other->gameObject->position += n * (mass_ratio_1 * delta);
+            return true;
         }
     }
     else
