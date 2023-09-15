@@ -22,7 +22,7 @@ public:
     SDL_Rect rect;
     SDL_Texture *tex;
 
-    virtual void update(double deltaTime);
+    virtual void update(float deltaTime);
     virtual void onCollision(GameObject *other);
 
     void addComponent(Component *component);

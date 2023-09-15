@@ -9,12 +9,15 @@ Ball::Ball(Vector2 p_pos, SDL_Texture *p_tex) : GameObject(p_pos, p_tex)
     new Collider(this, Collider::COLLIDER_CIRCLE);
 }
 
-void Ball::update(double deltaTime)
+void Ball::update(float deltaTime)
 {
     GameObject::update(deltaTime);
 }
 
 void Ball::onCollision(GameObject *other)
 {
-    std::cout << "Ball collided with " << other->name << std::endl;
+    if (other->name == "player")
+    {
+        //
+    }
 }

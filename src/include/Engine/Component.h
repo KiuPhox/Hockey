@@ -8,5 +8,5 @@ public:
     GameObject *gameObject = nullptr;
     Component(GameObject *obj);
 
-    virtual void update(double deltaTime);
+    virtual void update(float deltaTime);
 };

@@ -8,6 +8,7 @@
 #include "Engine/RenderWindow.h"
 #include "Engine/Collider.h"
 #include "Engine/Physic.h"
+#include "Engine/Input.h"
 
 #include "Game/Ball.h"
 
@@ -32,20 +33,19 @@ SDL_Texture *ballTexture = window.loadTexture("assets/images/ball.png");
 SDL_Texture *playerRedTexture = window.loadTexture("assets/images/player_red.png");
 SDL_Texture *playerBlueTexture = window.loadTexture("assets/images/player_blue.png");
 
+SDL_Event event;
+
 Uint64 currentTick = SDL_GetPerformanceCounter();
 Uint64 lastTick = 0;
-double deltaTime = 0;
-
-SDL_Event event;
+float deltaTime = 0;
 
 TTF_Font *font32 = TTF_OpenFont("assets/fonts/AlienAbduction.ttf", 32);
 
 Physic *physic;
+Input *input;
 
-void update(double deltaTime)
+void update(float deltaTime)
 {
-    physic->update(deltaTime);
-
     for (GameObject *obj : GameObject::gameObjects)
     {
         obj->update(deltaTime);
@@ -79,21 +79,27 @@ void initGame()
 
 void loop()
 {
-    while (true)
+    int quit = 0;
+
+    while (!quit)
     {
-        if (SDL_PollEvent(&event))
+
+        while (SDL_PollEvent(&event))
         {
-            if (SDL_QUIT == event.type)
+            if (event.type == SDL_QUIT)
             {
+                quit = 1;
                 break;
             }
         }
 
         lastTick = currentTick;
         currentTick = SDL_GetPerformanceCounter();
-        deltaTime = (double)((currentTick - lastTick) / (double)SDL_GetPerformanceFrequency());
+        deltaTime = (currentTick - lastTick) / (float)SDL_GetPerformanceFrequency();
 
-        update(double(deltaTime));
+        input->update();
+        physic->update();
+        update(deltaTime);
         render();
     }
 }

@@ -6,8 +6,8 @@ class Physic
 {
 public:
     Physic();
-    void update(double deltaTime);
+    void update();
 
 private:
-    bool checkCollision(Collider *collider1, Collider *collider2, double deltaTime);
+    bool checkCollision(Collider *collider1, Collider *collider2);
 };

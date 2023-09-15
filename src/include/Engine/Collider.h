@@ -23,7 +23,7 @@ public:
     Vector2 offset;
     float radius = 0;
 
-    void update(double deltaTime) override;
+    void update(float deltaTime) override;
 
 private:
     bool checkCollision(Collider *other);

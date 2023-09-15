@@ -17,7 +17,7 @@ GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : position(p_pos), tex
     SDL_QueryTexture(p_tex, NULL, NULL, &rect.w, &rect.h);
 }
 
-void GameObject::update(double deltaTime)
+void GameObject::update(float deltaTime)
 {
     for (auto &component : components)
     {

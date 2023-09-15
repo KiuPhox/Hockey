@@ -8,7 +8,7 @@ Physic::Physic()
     //
 }
 
-void Physic::update(double deltaTime)
+void Physic::update()
 {
     for (auto &collider : Collider::colliders)
     {
@@ -16,7 +16,7 @@ void Physic::update(double deltaTime)
         {
             if (collider != other)
             {
-                if (checkCollision(collider, other, deltaTime))
+                if (checkCollision(collider, other))
                 {
                     collider->gameObject->onCollision(other->gameObject);
                     other->gameObject->onCollision(collider->gameObject);
@@ -26,7 +26,7 @@ void Physic::update(double deltaTime)
     }
 }
 
-bool Physic::checkCollision(Collider *collider, Collider *other, double deltaTime)
+bool Physic::checkCollision(Collider *collider, Collider *other)
 {
     Vector2 this_pos = collider->gameObject->position + collider->offset;
     Vector2 other_pos = other->gameObject->position + other->offset;

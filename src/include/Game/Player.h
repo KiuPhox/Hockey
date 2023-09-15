@@ -16,10 +16,12 @@ public:
 
     TEAM team;
 
-    void update(double deltaTime) override;
+    void update(float deltaTime) override;
     void setActive(bool active);
     Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team);
 
 private:
     bool active = false;
+
+    Vector2 getMovementVector();
 };

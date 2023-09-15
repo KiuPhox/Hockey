@@ -5,14 +5,13 @@ std::vector<Collider *> Collider::colliders;
 
 Collider::Collider(GameObject *obj, TYPE_COLLIDER type) : Component(obj)
 {
-
     this->type = type;
     this->size = Vector2(obj->rect.w, obj->rect.h);
     this->radius = 10;
     colliders.push_back(this);
 }
 
-void Collider::update(double deltaTime)
+void Collider::update(float deltaTime)
 {
     //
 }

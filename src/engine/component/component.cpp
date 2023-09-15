@@ -7,7 +7,7 @@ Component::Component(GameObject *obj)
     this->gameObject->addComponent(this);
 }
 
-void Component::update(double deltaTime)
+void Component::update(float deltaTime)
 {
     //
 }
