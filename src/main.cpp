@@ -46,9 +46,9 @@ Input *input;
 
 void update(float deltaTime)
 {
-    for (GameObject *obj : GameObject::gameObjects)
+    for (GameObject *gameObject : GameObject::gameObjects)
     {
-        obj->update(deltaTime);
+        gameObject->update(deltaTime);
     }
 }
 
@@ -56,9 +56,9 @@ void render()
 {
     window.clear();
 
-    for (auto &gameObject : GameObject::gameObjects)
+    for (GameObject *gameObject : GameObject::gameObjects)
     {
-        window.render(*gameObject);
+        window.render(gameObject);
     }
 
     window.display();
@@ -69,7 +69,8 @@ void initGame()
     new GameObject(Vector2(0, 0), bgTexture);
     new Ball(Vector2(0, 0), ballTexture);
     new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
-    // new Player(Vector2(-150, -100), playerRedTexture, Player::RED_TEAM);
+    new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM);
+
     // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
     // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
     // new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);

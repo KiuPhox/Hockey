@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SDL2/SDL_image.h>
 #include <vector>
 #include <string>
@@ -27,7 +28,16 @@ public:
     void addComponent(Component *component);
 
     template <typename T>
-    T *getComponent();
+    T *getComponent()
+    {
+        for (auto &component : components)
+        {
+            T *result = dynamic_cast<T *>(component);
+            if (result != nullptr)
+                return result;
+        }
+        return nullptr;
+    }
 
 private:
     std::vector<Component *> components;

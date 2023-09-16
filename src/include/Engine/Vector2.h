@@ -24,7 +24,7 @@ public:
     float GetSqrLength() const;
     float Dot(const Vector2 &right) const;
     float GetAngle() const;
-    Vector2 GetNormalized() const;
+    Vector2 Normalized() const;
     Vector2 GetRotated(const float &angle) const;
 
     bool EqualTo(const Vector2 &right) const;
@@ -95,7 +95,7 @@ inline float Vector2::GetAngle() const
     return _cache_angle;
 }
 
-inline Vector2 Vector2::GetNormalized() const
+inline Vector2 Vector2::Normalized() const
 {
     float len = this->GetLength();
     return Vector2(this->x / len, this->y / len);
@@ -123,14 +123,6 @@ inline void Vector2::Rotate(const float &angle)
 
     this->x = (x * cs - y * sn);
     this->y = (x * sn + y * cs);
-}
-
-inline void Vector2::Normalize()
-{
-    float len = this->GetLength();
-
-    this->x /= len;
-    this->y /= len;
 }
 
 inline Vector2 &Vector2::operator=(const Vector2 &right)

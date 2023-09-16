@@ -1,6 +1,7 @@
 BUILD_DIR = build
 SOURCE_DIR = src
 SOURCE_FILES := $(wildcard $(SOURCE_DIR)/*.cpp) \
+				$(wildcard $(SOURCE_DIR)/*.c) \
 			   	$(wildcard $(SOURCE_DIR)/game/*.cpp) \
                	$(wildcard $(SOURCE_DIR)/engine/*.cpp) \
 				$(wildcard $(SOURCE_DIR)/engine/component/*.cpp) \

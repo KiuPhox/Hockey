@@ -2,8 +2,10 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
+#include "SDL2/SDL2_gfxPrimitives.h"
+
 #include "Engine/RenderWindow.h"
-#include "Engine/GameObject.h"
+#include "Engine/Collider.h"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h) : window(NULL), renderer(NULL)
 {
@@ -38,23 +40,35 @@ void RenderWindow::clear()
     SDL_RenderClear(renderer);
 }
 
-void RenderWindow::render(GameObject &p_gameObject)
+void RenderWindow::render(GameObject *p_gameObject)
 {
     SDL_Rect src;
-    src.x = p_gameObject.rect.x;
-    src.y = p_gameObject.rect.y;
-    src.w = p_gameObject.rect.w;
-    src.h = p_gameObject.rect.h;
+    src.x = p_gameObject->rect.x;
+    src.y = p_gameObject->rect.y;
+    src.w = p_gameObject->rect.w;
+    src.h = p_gameObject->rect.h;
 
     SDL_Rect dst;
-    dst.x = p_gameObject.position.x - p_gameObject.rect.w * p_gameObject.scale.x / 2 + 400;
-    dst.y = p_gameObject.position.y - p_gameObject.rect.h * p_gameObject.scale.y / 2 + 248;
-    dst.w = p_gameObject.rect.w * p_gameObject.scale.x;
-    dst.h = p_gameObject.rect.h * p_gameObject.scale.y;
+    dst.x = p_gameObject->position.x - p_gameObject->rect.w * p_gameObject->scale.x / 2 + 400;
+    dst.y = p_gameObject->position.y - p_gameObject->rect.h * p_gameObject->scale.y / 2 + 248;
+    dst.w = p_gameObject->rect.w * p_gameObject->scale.x;
+    dst.h = p_gameObject->rect.h * p_gameObject->scale.y;
 
-    SDL_RenderCopyEx(renderer, p_gameObject.tex, &src, &dst, p_gameObject.angle, 0, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(renderer, p_gameObject->tex, &src, &dst, p_gameObject->angle, 0, SDL_FLIP_NONE);
     // Debug
-    SDL_RenderDrawRect(renderer, &dst);
+    Collider *collider = p_gameObject->getComponent<Collider>();
+
+    if (collider != nullptr)
+    {
+        if (collider->type == Collider::COLLIDER_RECT)
+        {
+            SDL_RenderDrawRect(renderer, &dst);
+        }
+        else if (collider->type == Collider::COLLIDER_CIRCLE)
+        {
+            circleColor(renderer, dst.x + dst.w / 2, dst.y + dst.h / 2, collider->radius, 0xFF0000FF);
+        }
+    }
 }
 
 void RenderWindow::render(int x, int y, SDL_Texture *p_tex)

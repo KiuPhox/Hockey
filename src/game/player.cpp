@@ -1,7 +1,7 @@
 #include "Game/Player.h"
 #include "Engine/Collider.h"
 #include "Engine/Input.h"
-#include "Engine/Math.h"
+#include "Engine/GameMath.h"
 
 #include <iostream>
 
@@ -14,16 +14,22 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
     this->team = team;
     this->angle = (team == RED_TEAM) ? 0 : 180;
     this->active = true;
-    new Collider(this, Collider::COLLIDER_CIRCLE);
+
+    Collider *collider = new Collider(this, Collider::COLLIDER_CIRCLE);
+    collider->radius = 36;
 }
 
 void Player::update(float deltaTime)
 {
     GameObject::update(deltaTime);
 
-    Vector2 movement = this->getMovementVector();
-    this->position += movement * MOVE_SPEED * deltaTime;
-    this->angle = Math::LerpAngle(this->angle, movement.GetAngle(), ROTATE_SPEED * deltaTime);
+    Vector2 movementVector = this->getMovementVector();
+    this->velocity = movementVector * MOVE_SPEED;
+    this->position += velocity * deltaTime;
+    if (!(movementVector == Vector2::ZERO))
+    {
+        this->angle = Math::LerpAngle(this->angle, movementVector.GetAngle(), ROTATE_SPEED * deltaTime);
+    }
 }
 
 Vector2 Player::getMovementVector()

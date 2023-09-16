@@ -35,14 +35,14 @@ void GameObject::addComponent(Component *component)
     components.push_back(component);
 }
 
-template <typename T>
-T *GameObject::getComponent()
-{
-    for (auto &component : components)
-    {
-        T *result = dynamic_cast<T *>(component);
-        if (result != nullptr)
-            return result;
-    }
-    return nullptr;
-}
+// template <typename T>
+// T *GameObject::getComponent()
+// {
+//     for (auto &component : components)
+//     {
+//         T *result = dynamic_cast<T *>(component);
+//         if (result != nullptr)
+//             return result;
+//     }
+//     return nullptr;
+// }

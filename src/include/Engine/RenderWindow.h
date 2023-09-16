@@ -12,7 +12,7 @@ public:
     SDL_Texture *loadTexture(const char *p_filePath);
     void cleanUp();
     void clear();
-    void render(GameObject &p_gameObject);
+    void render(GameObject *p_gameObject);
     void render(int x, int y, SDL_Texture *p_tex);
     void render(float p_x, float p_y, const char *p_text, TTF_Font *font, SDL_Color textColor);
     void renderCenter(float p_x, float p_y, const char *p_text, TTF_Font *font, SDL_Color textColor);
