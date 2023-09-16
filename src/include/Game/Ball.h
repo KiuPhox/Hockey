@@ -5,6 +5,8 @@
 
 #include "Engine/GameObject.h"
 #include "Engine/Vector2.h"
+#include "Engine/RigidBody.h"
+#include "Engine/Collider.h"
 #include "Player.h"
 
 class Ball : public GameObject
@@ -16,4 +18,9 @@ public:
 
 private:
     Vector2 velocity;
+    RigidBody *rigidBody;
+    Collider *collider;
+
+    void bounceOffScreenBounds();
+    void limitSpeed(float maxSpeed);
 };

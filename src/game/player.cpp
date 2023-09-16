@@ -16,16 +16,29 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
     this->active = true;
 
     Collider *collider = new Collider(this, Collider::COLLIDER_CIRCLE);
-    collider->radius = 36;
+    collider->radius = 32;
+
+    this->rigidBody = new RigidBody(this);
 }
 
 void Player::update(float deltaTime)
 {
     GameObject::update(deltaTime);
+    this->move(deltaTime);
+    this->clampPositionToScreenBounds();
+}
 
+void Player::clampPositionToScreenBounds()
+{
+    this->position.x = Math::Clamp(this->position.x, -400 + 32, 400 - 32);
+    this->position.y = Math::Clamp(this->position.y, -248 + 32, 248 - 32);
+}
+
+void Player::move(float deltaTime)
+{
     Vector2 movementVector = this->getMovementVector();
-    this->velocity = movementVector * MOVE_SPEED;
-    this->position += velocity * deltaTime;
+    this->rigidBody->velocity = movementVector * MOVE_SPEED;
+
     if (!(movementVector == Vector2::ZERO))
     {
         this->angle = Math::LerpAngle(this->angle, movementVector.GetAngle(), ROTATE_SPEED * deltaTime);

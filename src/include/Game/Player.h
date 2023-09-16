@@ -4,6 +4,7 @@
 
 #include "Engine/GameObject.h"
 #include "Engine/Vector2.h"
+#include "Engine/RigidBody.h"
 
 class Player : public GameObject
 {
@@ -15,7 +16,6 @@ public:
     };
 
     TEAM team;
-    Vector2 velocity;
 
     void update(float deltaTime) override;
     void setActive(bool active);
@@ -24,6 +24,9 @@ public:
 
 private:
     bool active = false;
+    RigidBody *rigidBody;
 
     Vector2 getMovementVector();
+    void clampPositionToScreenBounds();
+    void move(float deltaTime);
 };

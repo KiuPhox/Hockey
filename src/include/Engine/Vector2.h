@@ -20,7 +20,7 @@ public:
 
     float x, y;
 
-    float GetLength() const;
+    float Magnitude() const;
     float GetSqrLength() const;
     float Dot(const Vector2 &right) const;
     float GetAngle() const;
@@ -30,7 +30,6 @@ public:
     bool EqualTo(const Vector2 &right) const;
 
     void Rotate(const float &angle);
-    void Normalize();
 
     Vector2 &operator=(const Vector2 &right);
     bool operator==(const Vector2 &right) const;
@@ -65,7 +64,7 @@ inline Vector2::Vector2(const float &x, const float &y) : x(x), y(y)
 {
 }
 
-inline float Vector2::GetLength() const
+inline float Vector2::Magnitude() const
 {
     if (_changed_length)
     {
@@ -97,7 +96,7 @@ inline float Vector2::GetAngle() const
 
 inline Vector2 Vector2::Normalized() const
 {
-    float len = this->GetLength();
+    float len = this->Magnitude();
     return Vector2(this->x / len, this->y / len);
 }
 

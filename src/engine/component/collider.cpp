@@ -32,7 +32,7 @@ bool Collider::checkCollision(Collider *other)
     }
     else if (type == COLLIDER_CIRCLE && type == other->type)
     {
-        return (this_pos - other_pos).GetLength() >= this->radius + other->radius;
+        return (this_pos - other_pos).Magnitude() >= this->radius + other->radius;
     }
     else
     {

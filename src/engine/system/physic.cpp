@@ -45,19 +45,19 @@ bool Physic::checkCollision(Collider *collider, Collider *other)
 
         Vector2 v = this_pos - other_pos;
 
-        float dist = v.GetLength();
+        float dist = v.Magnitude();
         float minDist = collider->radius + other->radius;
 
         if (dist < minDist)
         {
-            // Vector2 n = v / dist;
-            // float mass_ratio_1 = collider->radius / minDist;
-            // float mass_ratio_2 = other->radius / minDist;
+            Vector2 n = v / dist;
+            float mass_ratio_1 = collider->radius / minDist;
+            float mass_ratio_2 = other->radius / minDist;
 
-            // float delta = 0.5 * 20 * (dist - minDist);
+            float delta = 0.5 * 20 * (dist - minDist);
 
-            // collider->gameObject->position -= n * (mass_ratio_2 * delta);
-            // other->gameObject->position += n * (mass_ratio_1 * delta);
+            collider->gameObject->position -= n * (mass_ratio_2 * delta);
+            other->gameObject->position += n * (mass_ratio_1 * delta);
             return true;
         }
     }
