@@ -135,7 +135,6 @@ inline void Vector2::Normalize()
 
 inline Vector2 &Vector2::operator=(const Vector2 &right)
 {
-    // проверка на самоприсваивание
     if (this != &right)
     {
         this->x = right.x;
