@@ -5,6 +5,7 @@
 #include "Engine/GameObject.h"
 #include "Engine/Vector2.h"
 #include "Engine/RigidBody.h"
+#include "Engine/Collider.h"
 
 class Player : public GameObject
 {
@@ -25,6 +26,7 @@ public:
 private:
     bool active = false;
     RigidBody *rigidBody;
+    Collider *collider;
 
     Vector2 getMovementVector();
     void clampPositionToScreenBounds();

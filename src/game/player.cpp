@@ -2,7 +2,6 @@
 #include "Engine/Collider.h"
 #include "Engine/Input.h"
 #include "Engine/GameMath.h"
-
 #include <iostream>
 
 const float MOVE_SPEED = 200;
@@ -15,7 +14,7 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
     this->angle = (team == RED_TEAM) ? 0 : 180;
     this->active = true;
 
-    Collider *collider = new Collider(this, Collider::COLLIDER_CIRCLE);
+    collider = new Collider(this, Collider::COLLIDER_CIRCLE);
     collider->radius = 32;
 
     this->rigidBody = new RigidBody(this);
@@ -30,8 +29,8 @@ void Player::update(float deltaTime)
 
 void Player::clampPositionToScreenBounds()
 {
-    this->position.x = Math::Clamp(this->position.x, -400 + 32, 400 - 32);
-    this->position.y = Math::Clamp(this->position.y, -248 + 32, 248 - 32);
+    this->position.x = Math::Clamp(this->position.x, -400 + collider->radius, 400 - collider->radius);
+    this->position.y = Math::Clamp(this->position.y, -248 + collider->radius, 248 - collider->radius);
 }
 
 void Player::move(float deltaTime)
