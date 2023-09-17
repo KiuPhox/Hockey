@@ -60,6 +60,18 @@ Vector2 Player::getMovementVector()
             if (Input::getKey(SDL_SCANCODE_D))
                 move.x = 1;
         }
+        else
+        {
+            // Arrow keys
+            if (Input::getKey(SDL_SCANCODE_UP))
+                move.y = -1;
+            if (Input::getKey(SDL_SCANCODE_DOWN))
+                move.y = 1;
+            if (Input::getKey(SDL_SCANCODE_LEFT))
+                move.x = -1;
+            if (Input::getKey(SDL_SCANCODE_RIGHT))
+                move.x = 1;
+        }
     }
     return move;
 }
