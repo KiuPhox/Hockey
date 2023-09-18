@@ -5,7 +5,8 @@
 #include "SDL2/SDL2_gfxPrimitives.h"
 
 #include "Engine/RenderWindow.h"
-#include "Engine/Collider.h"
+#include "Engine/CircleCollider.h"
+#include "Engine/AABBCollider.h"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h) : window(NULL), renderer(NULL)
 {
@@ -60,13 +61,14 @@ void RenderWindow::render(GameObject *p_gameObject)
 
     if (collider != nullptr)
     {
-        if (collider->type == Collider::COLLIDER_RECT)
+        if (dynamic_cast<AABBCollider *>(collider) != nullptr)
         {
             SDL_RenderDrawRect(renderer, &dst);
         }
-        else if (collider->type == Collider::COLLIDER_CIRCLE)
+        else if (dynamic_cast<CircleCollider *>(collider) != nullptr)
         {
-            circleColor(renderer, dst.x + dst.w / 2, dst.y + dst.h / 2, collider->radius, 0xFF0000FF);
+            CircleCollider *circleCollider = dynamic_cast<CircleCollider *>(collider);
+            circleColor(renderer, dst.x + dst.w / 2, dst.y + dst.h / 2, circleCollider->radius, 0xFF0000FF);
         }
     }
 }

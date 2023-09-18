@@ -14,10 +14,10 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
     this->angle = (team == RED_TEAM) ? 0 : 180;
     this->active = true;
 
-    collider = new Collider(this, Collider::COLLIDER_CIRCLE);
-    collider->radius = 32;
+    collider = new CircleCollider(this, 32);
 
     this->rigidBody = new RigidBody(this);
+    this->rigidBody->cor = 5;
 }
 
 void Player::update(float deltaTime)
@@ -36,7 +36,7 @@ void Player::clampPositionToScreenBounds()
 void Player::move(float deltaTime)
 {
     Vector2 movementVector = this->getMovementVector();
-    this->rigidBody->velocity = movementVector * MOVE_SPEED;
+    this->rigidBody->linearVelocity = movementVector * MOVE_SPEED;
 
     if (!(movementVector == Vector2::ZERO))
     {

@@ -21,7 +21,7 @@ public:
     float x, y;
 
     float Magnitude() const;
-    float GetSqrLength() const;
+    float LengthSqr() const;
     float Dot(const Vector2 &right) const;
     float GetAngle() const;
     Vector2 Normalized() const;
@@ -74,7 +74,7 @@ inline float Vector2::Magnitude() const
     return _cache_length;
 }
 
-inline float Vector2::GetSqrLength() const
+inline float Vector2::LengthSqr() const
 {
     return (x * x + y * y);
 }

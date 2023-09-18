@@ -5,7 +5,9 @@ SOURCE_FILES := $(wildcard $(SOURCE_DIR)/*.cpp) \
 			   	$(wildcard $(SOURCE_DIR)/game/*.cpp) \
                	$(wildcard $(SOURCE_DIR)/engine/*.cpp) \
 				$(wildcard $(SOURCE_DIR)/engine/component/*.cpp) \
+				$(wildcard $(SOURCE_DIR)/engine/component/collider/*.cpp) \
 				$(wildcard $(SOURCE_DIR)/engine/system/*.cpp) \
+				$(wildcard $(SOURCE_DIR)/engine/system/physic/*.cpp) \
                	$(wildcard $(SOURCE_DIR)/utils/*.cpp)
 OBJECTS := $(patsubst $(SOURCE_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SOURCE_FILES))
 EXECUTABLE = $(BUILD_DIR)/main.exe

@@ -8,20 +8,9 @@ class Collider : public Component
 {
 public:
     static std::vector<Collider *> colliders;
+    Vector2 offset = Vector2::ZERO;
 
-    enum TYPE_COLLIDER
-    {
-        COLLIDER_RECT,
-        COLLIDER_CIRCLE
-    };
-
-    TYPE_COLLIDER type = COLLIDER_RECT;
-
-    Collider(GameObject *obj, TYPE_COLLIDER type = COLLIDER_RECT);
-
-    Vector2 size;
-    Vector2 offset;
-    float radius = 0;
+    Collider(GameObject *obj);
 
     void update(float deltaTime) override;
 
