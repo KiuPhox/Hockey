@@ -6,15 +6,9 @@
 
 std::vector<GameObject *> GameObject::gameObjects;
 
-GameObject::GameObject(Vector2 p_pos, SDL_Texture *p_tex) : position(p_pos), tex(p_tex)
+GameObject::GameObject(Vector2 p_pos) : position(p_pos)
 {
     gameObjects.push_back(this);
-
-    rect.x = 0;
-    rect.y = 0;
-    rect.w = 32;
-    rect.h = 32;
-    SDL_QueryTexture(p_tex, NULL, NULL, &rect.w, &rect.h);
 }
 
 void GameObject::update(float deltaTime)

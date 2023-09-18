@@ -9,6 +9,7 @@
 #include "Engine/Collider.h"
 #include "Engine/Physic.h"
 #include "Engine/Input.h"
+#include "Engine/Sprite.h"
 
 #include "Game/Ball.h"
 
@@ -66,7 +67,8 @@ void render()
 
 void initGame()
 {
-    new GameObject(Vector2(0, 0), bgTexture);
+    GameObject *bg = new GameObject(Vector2(0, 0));
+    new Sprite(bg, bgTexture);
     new Ball(Vector2(0, 0), ballTexture);
     new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
     new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM);

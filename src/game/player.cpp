@@ -1,13 +1,15 @@
 #include "Game/Player.h"
-#include "Engine/Collider.h"
+#include "Engine/CircleCollider.h"
 #include "Engine/Input.h"
 #include "Engine/GameMath.h"
+#include "Engine/Sprite.h"
+
 #include <iostream>
 
 const float MOVE_SPEED = 200;
 const float ROTATE_SPEED = 20;
 
-Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos, p_tex)
+Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos)
 {
     this->name = "player";
     this->team = team;
@@ -18,6 +20,8 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos,
 
     this->rigidBody = new RigidBody(this);
     this->rigidBody->cor = 5;
+
+    new Sprite(this, p_tex);
 }
 
 void Player::update(float deltaTime)

@@ -1,10 +1,15 @@
 #include "Engine/AABBCollider.h"
+#include "Engine/Sprite.h"
 #include "Engine/GameObject.h"
 
 AABBCollider::AABBCollider(GameObject *obj) : Collider(obj)
 {
-    this->size = Vector2(obj->rect.w, obj->rect.h);
-    this->halfSize = this->size / 2;
+    Sprite *sprite = obj->getComponent<Sprite>();
+    if (sprite != NULL)
+    {
+        this->size = Vector2(sprite->rect.w, sprite->rect.h);
+        this->halfSize = this->size / 2;
+    }
 }
 
 AABBCollider::AABBCollider(GameObject *obj, Vector2 min, Vector2 max) : Collider(obj)

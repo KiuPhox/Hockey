@@ -7,6 +7,7 @@
 #include "Engine/RenderWindow.h"
 #include "Engine/CircleCollider.h"
 #include "Engine/AABBCollider.h"
+#include "Engine/Sprite.h"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h) : window(NULL), renderer(NULL)
 {
@@ -43,32 +44,44 @@ void RenderWindow::clear()
 
 void RenderWindow::render(GameObject *p_gameObject)
 {
-    SDL_Rect src;
-    src.x = p_gameObject->rect.x;
-    src.y = p_gameObject->rect.y;
-    src.w = p_gameObject->rect.w;
-    src.h = p_gameObject->rect.h;
+    Sprite *sprite = p_gameObject->getComponent<Sprite>();
 
-    SDL_Rect dst;
-    dst.x = p_gameObject->position.x - p_gameObject->rect.w * p_gameObject->scale.x / 2 + 400;
-    dst.y = p_gameObject->position.y - p_gameObject->rect.h * p_gameObject->scale.y / 2 + 248;
-    dst.w = p_gameObject->rect.w * p_gameObject->scale.x;
-    dst.h = p_gameObject->rect.h * p_gameObject->scale.y;
+    if (sprite != nullptr)
+    {
+        SDL_Rect src;
+        src.x = sprite->rect.x;
+        src.y = sprite->rect.y;
+        src.w = sprite->rect.w;
+        src.h = sprite->rect.h;
 
-    SDL_RenderCopyEx(renderer, p_gameObject->tex, &src, &dst, p_gameObject->angle, 0, SDL_FLIP_NONE);
-    // Debug
+        SDL_Rect dst;
+        dst.x = p_gameObject->position.x - sprite->rect.w * p_gameObject->scale.x / 2 + 400;
+        dst.y = p_gameObject->position.y - sprite->rect.h * p_gameObject->scale.y / 2 + 248;
+        dst.w = sprite->rect.w * p_gameObject->scale.x;
+        dst.h = sprite->rect.h * p_gameObject->scale.y;
+
+        SDL_RenderCopyEx(renderer, sprite->texture, &src, &dst, p_gameObject->angle, 0, SDL_FLIP_NONE);
+    }
+
+    // Debug collider
     Collider *collider = p_gameObject->getComponent<Collider>();
 
     if (collider != nullptr)
     {
         if (dynamic_cast<AABBCollider *>(collider) != nullptr)
         {
+            AABBCollider *aabbCollider = dynamic_cast<AABBCollider *>(collider);
+            SDL_Rect dst;
+            dst.x = p_gameObject->position.x - aabbCollider->size.x * p_gameObject->scale.x / 2 + 400;
+            dst.y = p_gameObject->position.y - aabbCollider->size.y * p_gameObject->scale.y / 2 + 248;
+            dst.w = aabbCollider->size.x * p_gameObject->scale.x;
+            dst.h = aabbCollider->size.y * p_gameObject->scale.y;
             SDL_RenderDrawRect(renderer, &dst);
         }
         else if (dynamic_cast<CircleCollider *>(collider) != nullptr)
         {
             CircleCollider *circleCollider = dynamic_cast<CircleCollider *>(collider);
-            circleColor(renderer, dst.x + dst.w / 2, dst.y + dst.h / 2, circleCollider->radius, 0xFF0000FF);
+            circleColor(renderer, p_gameObject->position.x + 400, p_gameObject->position.y + 248, circleCollider->radius, 0xFF0000FF);
         }
     }
 }
