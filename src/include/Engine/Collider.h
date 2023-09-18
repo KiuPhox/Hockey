@@ -9,6 +9,7 @@ class Collider : public Component
 public:
     static std::vector<Collider *> colliders;
     Vector2 offset = Vector2::ZERO;
+    bool isTrigger;
 
     Collider(GameObject *obj);
 

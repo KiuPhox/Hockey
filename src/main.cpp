@@ -13,6 +13,7 @@
 
 #include "Game/Ball.h"
 #include "Game/Bound.h"
+#include "Game/Goal.h"
 
 bool init()
 {
@@ -80,15 +81,19 @@ void initGame()
     new Bound(Vector2(0, -248), Vector2(800, 0));
     new Bound(Vector2(0, 248), Vector2(800, 0));
 
-    // Left goal
+    // Left goal bounds
     new Bound(Vector2(-390, 0), Vector2(12, 270));
     new Bound(Vector2(-353, 125), Vector2(56, 12));
     new Bound(Vector2(-353, -130), Vector2(56, 12));
 
-    // Right goal
+    // Right goal bounds
     new Bound(Vector2(390, 0), Vector2(12, 270));
     new Bound(Vector2(353, 125), Vector2(56, 12));
     new Bound(Vector2(353, -130), Vector2(56, 12));
+
+    // Goals
+    new Goal(Vector2(-360, 0), Player::RED_TEAM);
+    new Goal(Vector2(360, 0), Player::BLUE_TEAM);
 
     // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
     // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);

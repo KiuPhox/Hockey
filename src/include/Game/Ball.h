@@ -20,6 +20,5 @@ private:
     RigidBody *rigidBody;
     CircleCollider *collider;
 
-    void bounceOffScreenBounds();
     void limitSpeed(float maxSpeed);
 };

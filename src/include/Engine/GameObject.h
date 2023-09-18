@@ -21,6 +21,7 @@ public:
 
     virtual void update(float deltaTime);
     virtual void onCollision(GameObject *other);
+    virtual void onTrigger(GameObject *other);
 
     void addComponent(Component *component);
 

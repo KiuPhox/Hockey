@@ -37,11 +37,26 @@ void Physic::update()
 
             if (result.isColliding)
             {
-                bodies1.push_back(rb1);
-                bodies2.push_back(rb2);
-                collider->gameObject->onCollision(other->gameObject);
-                other->gameObject->onCollision(collider->gameObject);
-                collisions.push_back(result);
+                if (collider->isTrigger || other->isTrigger)
+                {
+                    if (collider->isTrigger)
+                    {
+                        collider->gameObject->onTrigger(other->gameObject);
+                    }
+                    if (other->isTrigger)
+                    {
+                        other->gameObject->onTrigger(collider->gameObject);
+                    }
+                }
+                else
+                {
+
+                    bodies1.push_back(rb1);
+                    bodies2.push_back(rb2);
+                    collider->gameObject->onCollision(other->gameObject);
+                    other->gameObject->onCollision(collider->gameObject);
+                    collisions.push_back(result);
+                }
             }
 
             for (int k = 0; k < this->impulseIterations; k++)
