@@ -18,6 +18,12 @@ AABBCollider::AABBCollider(GameObject *obj, Vector2 min, Vector2 max) : Collider
     this->halfSize = this->size / 2;
 }
 
+AABBCollider::AABBCollider(GameObject *obj, Vector2 size) : Collider(obj)
+{
+    this->size = size;
+    this->halfSize = this->size / 2;
+}
+
 Vector2 AABBCollider::getMin()
 {
     return this->gameObject->position - this->halfSize;

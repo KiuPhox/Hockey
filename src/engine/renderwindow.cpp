@@ -64,26 +64,26 @@ void RenderWindow::render(GameObject *p_gameObject)
     }
 
     // Debug collider
-    Collider *collider = p_gameObject->getComponent<Collider>();
+    // Collider *collider = p_gameObject->getComponent<Collider>();
 
-    if (collider != nullptr)
-    {
-        if (dynamic_cast<AABBCollider *>(collider) != nullptr)
-        {
-            AABBCollider *aabbCollider = dynamic_cast<AABBCollider *>(collider);
-            SDL_Rect dst;
-            dst.x = p_gameObject->position.x - aabbCollider->size.x * p_gameObject->scale.x / 2 + 400;
-            dst.y = p_gameObject->position.y - aabbCollider->size.y * p_gameObject->scale.y / 2 + 248;
-            dst.w = aabbCollider->size.x * p_gameObject->scale.x;
-            dst.h = aabbCollider->size.y * p_gameObject->scale.y;
-            SDL_RenderDrawRect(renderer, &dst);
-        }
-        else if (dynamic_cast<CircleCollider *>(collider) != nullptr)
-        {
-            CircleCollider *circleCollider = dynamic_cast<CircleCollider *>(collider);
-            circleColor(renderer, p_gameObject->position.x + 400, p_gameObject->position.y + 248, circleCollider->radius, 0xFF0000FF);
-        }
-    }
+    // if (collider != nullptr)
+    // {
+    //     if (dynamic_cast<AABBCollider *>(collider) != nullptr)
+    //     {
+    //         AABBCollider *aabbCollider = dynamic_cast<AABBCollider *>(collider);
+    //         SDL_Rect dst;
+    //         dst.x = p_gameObject->position.x - aabbCollider->size.x * p_gameObject->scale.x / 2 + 400;
+    //         dst.y = p_gameObject->position.y - aabbCollider->size.y * p_gameObject->scale.y / 2 + 248;
+    //         dst.w = aabbCollider->size.x * p_gameObject->scale.x;
+    //         dst.h = aabbCollider->size.y * p_gameObject->scale.y;
+    //         SDL_RenderDrawRect(renderer, &dst);
+    //     }
+    //     else if (dynamic_cast<CircleCollider *>(collider) != nullptr)
+    //     {
+    //         CircleCollider *circleCollider = dynamic_cast<CircleCollider *>(collider);
+    //         circleColor(renderer, p_gameObject->position.x + circleCollider->offset.x + 400, p_gameObject->position.y + circleCollider->offset.y + 248, circleCollider->radius, 0xFF0000FF);
+    //     }
+    // }
 }
 
 void RenderWindow::render(int x, int y, SDL_Texture *p_tex)

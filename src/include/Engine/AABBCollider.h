@@ -9,6 +9,7 @@ public:
 
     AABBCollider(GameObject *obj);
     AABBCollider(GameObject *obj, Vector2 min, Vector2 max);
+    AABBCollider(GameObject *obj, Vector2 size);
     Vector2 getMin();
     Vector2 getMax();
 

@@ -6,12 +6,13 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "Engine/RenderWindow.h"
-#include "Engine/Collider.h"
+#include "Engine/AABBCollider.h"
 #include "Engine/Physic.h"
 #include "Engine/Input.h"
 #include "Engine/Sprite.h"
 
 #include "Game/Ball.h"
+#include "Game/Bound.h"
 
 bool init()
 {
@@ -72,6 +73,22 @@ void initGame()
     new Ball(Vector2(0, 0), ballTexture);
     new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
     new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM);
+
+    // Screen
+    new Bound(Vector2(-400, 0), Vector2(0, 496));
+    new Bound(Vector2(400, 0), Vector2(0, 496));
+    new Bound(Vector2(0, -248), Vector2(800, 0));
+    new Bound(Vector2(0, 248), Vector2(800, 0));
+
+    // Left goal
+    new Bound(Vector2(-390, 0), Vector2(12, 270));
+    new Bound(Vector2(-353, 125), Vector2(56, 12));
+    new Bound(Vector2(-353, -130), Vector2(56, 12));
+
+    // Right goal
+    new Bound(Vector2(390, 0), Vector2(12, 270));
+    new Bound(Vector2(353, 125), Vector2(56, 12));
+    new Bound(Vector2(353, -130), Vector2(56, 12));
 
     // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
     // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);

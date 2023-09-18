@@ -39,6 +39,8 @@ void Physic::update()
             {
                 bodies1.push_back(rb1);
                 bodies2.push_back(rb2);
+                collider->gameObject->onCollision(other->gameObject);
+                other->gameObject->onCollision(collider->gameObject);
                 collisions.push_back(result);
             }
 
@@ -88,6 +90,18 @@ void Physic::applyImpulse(RigidBody *a, RigidBody *b, CollisionManifold &m)
     }
 
     Vector2 impulse = relativeNormal * j;
-    a->linearVelocity = a->linearVelocity - impulse * invMass1;
-    b->linearVelocity = b->linearVelocity + impulse * invMass2;
+
+    if (a->isStatic)
+    {
+        b->linearVelocity = b->linearVelocity + impulse * invMass2;
+    }
+    else if (b->isStatic)
+    {
+        a->linearVelocity = a->linearVelocity - impulse * invMass1;
+    }
+    else
+    {
+        a->linearVelocity = a->linearVelocity - impulse * invMass1;
+        b->linearVelocity = b->linearVelocity + impulse * invMass2;
+    }
 }

@@ -14,7 +14,7 @@ Ball::Ball(Vector2 p_pos, SDL_Texture *p_tex) : GameObject(p_pos)
     this->collider = new CircleCollider(this, 20);
 
     this->rigidBody = new RigidBody(this);
-    this->rigidBody->friction = 0.999f;
+    this->rigidBody->friction = 0.995f;
     this->rigidBody->cor = 5;
 
     new Sprite(this, p_tex);
@@ -23,7 +23,7 @@ Ball::Ball(Vector2 p_pos, SDL_Texture *p_tex) : GameObject(p_pos)
 void Ball::update(float deltaTime)
 {
     GameObject::update(deltaTime);
-    this->bounceOffScreenBounds();
+    // this->bounceOffScreenBounds();
     this->limitSpeed(MAX_SPEED);
 }
 

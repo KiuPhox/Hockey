@@ -26,6 +26,11 @@ Vector2 CollisionManifold::getNormal()
     return this->normal;
 }
 
+void CollisionManifold::setNormal(Vector2 normal)
+{
+    this->normal = normal;
+}
+
 std::vector<Vector2> CollisionManifold::getContactPoints()
 {
     return this->contactPoints;

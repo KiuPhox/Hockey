@@ -29,6 +29,5 @@ private:
     CircleCollider *collider;
 
     Vector2 getMovementVector();
-    void clampPositionToScreenBounds();
     void move(float deltaTime);
 };

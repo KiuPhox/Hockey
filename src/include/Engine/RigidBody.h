@@ -18,6 +18,8 @@ public:
     float cor = 1;
     float friction = 1;
 
+    bool isStatic;
+
     RigidBody(GameObject *obj);
 
     void update(float deltaTime) override;

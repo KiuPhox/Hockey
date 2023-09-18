@@ -16,25 +16,18 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos)
     this->angle = (team == RED_TEAM) ? 0 : 180;
     this->active = true;
 
+    new Sprite(this, p_tex);
+
     collider = new CircleCollider(this, 32);
 
     this->rigidBody = new RigidBody(this);
     this->rigidBody->cor = 5;
-
-    new Sprite(this, p_tex);
 }
 
 void Player::update(float deltaTime)
 {
     GameObject::update(deltaTime);
     this->move(deltaTime);
-    this->clampPositionToScreenBounds();
-}
-
-void Player::clampPositionToScreenBounds()
-{
-    this->position.x = Math::Clamp(this->position.x, -400 + collider->radius, 400 - collider->radius);
-    this->position.y = Math::Clamp(this->position.y, -248 + collider->radius, 248 - collider->radius);
 }
 
 void Player::move(float deltaTime)

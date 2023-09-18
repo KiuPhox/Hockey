@@ -9,6 +9,7 @@ public:
     CollisionManifold(Vector2 normal, float depth);
     void addContactPoint(Vector2 contact);
     Vector2 getNormal();
+    void setNormal(Vector2 normal);
     std::vector<Vector2> getContactPoints();
     float getDepth();
     bool isColliding;

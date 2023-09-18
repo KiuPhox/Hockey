@@ -7,6 +7,7 @@ RigidBody::RigidBody(GameObject *obj) : Component(obj)
 {
     this->linearVelocity = Vector2(0, 0);
     this->friction = 1;
+    this->isStatic = false;
 }
 
 void RigidBody::update(float deltaTime)
