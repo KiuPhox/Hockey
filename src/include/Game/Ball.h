@@ -21,4 +21,5 @@ private:
     CircleCollider *collider;
 
     void limitSpeed(float maxSpeed);
+    void updateAngularVelocity();
 };

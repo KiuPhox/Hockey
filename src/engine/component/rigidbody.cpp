@@ -20,6 +20,7 @@ void RigidBody::update(float deltaTime)
     this->linearVelocity *= this->friction;
 
     this->gameObject->position += this->linearVelocity * deltaTime;
+    this->gameObject->angle += this->angularVelocity * deltaTime;
     this->clearAccumulators();
 }
 

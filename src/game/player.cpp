@@ -21,7 +21,8 @@ Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos)
     collider = new CircleCollider(this, 32);
 
     this->rigidBody = new RigidBody(this);
-    this->rigidBody->cor = 5;
+    this->rigidBody->cor = 2;
+    this->rigidBody->setMass(30);
 }
 
 void Player::update(float deltaTime)
