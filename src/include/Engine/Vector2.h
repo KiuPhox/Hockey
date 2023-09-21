@@ -97,6 +97,10 @@ inline float Vector2::GetAngle() const
 inline Vector2 Vector2::Normalized() const
 {
     float len = this->Magnitude();
+    if (len == 0)
+    {
+        return ZERO;
+    }
     return Vector2(this->x / len, this->y / len);
 }
 

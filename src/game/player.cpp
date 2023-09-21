@@ -70,7 +70,7 @@ Vector2 Player::getMovementVector()
                 move.x = 1;
         }
     }
-    return move;
+    return move.Normalized();
 }
 
 void Player::setActive(bool active)
