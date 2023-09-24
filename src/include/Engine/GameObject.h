@@ -17,7 +17,7 @@ public:
     Vector2 scale = Vector2(1, 1);
     float angle = 0;
 
-    GameObject(Vector2 p_pos);
+    GameObject(Vector2 pos);
 
     virtual void update(float deltaTime);
     virtual void onCollision(GameObject *other);

@@ -14,6 +14,7 @@
 #include "Game/Ball.h"
 #include "Game/Bound.h"
 #include "Game/Goal.h"
+#include "Game/Score.h"
 
 bool init()
 {
@@ -94,6 +95,8 @@ void initGame()
     // Goals
     new Goal(Vector2(-360, 0), Player::RED_TEAM);
     new Goal(Vector2(360, 0), Player::BLUE_TEAM);
+
+    Score::init(font32);
 
     // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
     // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);

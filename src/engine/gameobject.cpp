@@ -6,7 +6,7 @@
 
 std::vector<GameObject *> GameObject::gameObjects;
 
-GameObject::GameObject(Vector2 p_pos) : position(p_pos)
+GameObject::GameObject(Vector2 pos) : position(pos)
 {
     gameObjects.push_back(this);
 }

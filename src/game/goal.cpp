@@ -1,4 +1,6 @@
 #include "Game/Goal.h"
+#include "Game/Score.h"
+
 #include "Engine/GameObject.h"
 #include "Engine/AABBCollider.h"
 
@@ -18,11 +20,11 @@ void Goal::onTrigger(GameObject *other)
     {
         if (this->team == Player::RED_TEAM)
         {
-            std::cout << "Blue team scored!" << std::endl;
+            Score::increase(Player::BLUE_TEAM);
         }
         else
         {
-            std::cout << "Red team scored!" << std::endl;
+            Score::increase(Player::RED_TEAM);
         }
 
         other->position = Vector2::ZERO;

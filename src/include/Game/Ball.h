@@ -12,7 +12,7 @@
 class Ball : public GameObject
 {
 public:
-    Ball(Vector2 p_pos, SDL_Texture *p_tex);
+    Ball(Vector2 pos, SDL_Texture *tex);
     void update(float deltaTime) override;
 
 private:

@@ -3,19 +3,20 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "GameObject.h"
+#include "Engine/GameObject.h"
+#include "Engine/Sprite.h"
+#include "Engine/Text.h"
 
 class RenderWindow
 {
 public:
-    RenderWindow(const char *p_title, int p_w, int p_h);
-    SDL_Texture *loadTexture(const char *p_filePath);
+    RenderWindow(const char *title, int w, int h);
+    SDL_Texture *loadTexture(const char *filePath);
     void cleanUp();
     void clear();
-    void render(GameObject *p_gameObject);
-    void render(int x, int y, SDL_Texture *p_tex);
-    void render(float p_x, float p_y, const char *p_text, TTF_Font *font, SDL_Color textColor);
-    void renderCenter(float p_x, float p_y, const char *p_text, TTF_Font *font, SDL_Color textColor);
+    void render(GameObject *gameObject);
+    void render(Sprite *sprite);
+    void render(Text *text);
     void display();
 
 private:
