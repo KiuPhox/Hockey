@@ -84,24 +84,20 @@ void initGame()
 
     // Left goal bounds
     new Bound(Vector2(-390, 0), Vector2(12, 270));
-    new Bound(Vector2(-353, 125), Vector2(56, 12));
-    new Bound(Vector2(-353, -130), Vector2(56, 12));
+    new Bound(Vector2(-353, -125), Vector2(56, 12));
+    new Bound(Vector2(-353, 130), Vector2(56, 12));
 
     // Right goal bounds
     new Bound(Vector2(390, 0), Vector2(12, 270));
-    new Bound(Vector2(353, 125), Vector2(56, 12));
-    new Bound(Vector2(353, -130), Vector2(56, 12));
+    new Bound(Vector2(353, -125), Vector2(56, 12));
+    new Bound(Vector2(353, 130), Vector2(56, 12));
 
     // Goals
-    new Goal(Vector2(-360, 0), Player::RED_TEAM);
-    new Goal(Vector2(360, 0), Player::BLUE_TEAM);
+    new Goal(Vector2(-364, 0), Player::RED_TEAM);
+    new Goal(Vector2(364, 0), Player::BLUE_TEAM);
 
     Score::init(font32);
 
-    // new Player(Vector2(-300, 0), playerRedTexture, Player::RED_TEAM);
-    // new Player(Vector2(150, 100), playerBlueTexture, Player::BLUE_TEAM);
-    // new Player(Vector2(150, -100), playerBlueTexture, Player::BLUE_TEAM);
-    // new Player(Vector2(300, 0), playerBlueTexture, Player::BLUE_TEAM);
     physic = new Physic();
 }
 

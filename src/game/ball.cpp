@@ -31,7 +31,7 @@ void Ball::updateAngularVelocity()
 {
     Vector2 linearVelocity = this->rigidBody->linearVelocity;
     float magnitude = linearVelocity.Magnitude();
-    this->rigidBody->angularVelocity = linearVelocity.x > 0 ? magnitude : -magnitude;
+    this->rigidBody->angularVelocity = linearVelocity.x > 0 ? -magnitude : magnitude;
 }
 
 void Ball::limitSpeed(float maxSpeed)

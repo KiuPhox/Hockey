@@ -11,11 +11,11 @@ void Score::init(TTF_Font *font)
     redScore = 0;
     blueScore = 0;
 
-    GameObject *redScoreObj = new GameObject(Vector2(-25, -225));
-    GameObject *blueScoreObj = new GameObject(Vector2(27, -225));
+    GameObject *redScoreObj = new GameObject(Vector2(-25, 225));
+    GameObject *blueScoreObj = new GameObject(Vector2(27, 225));
 
-    redScoreText = new Text(redScoreObj, "0", font, {255, 0, 0, 255}, Align::CENTER);
-    blueScoreText = new Text(blueScoreObj, "0", font, {0, 0, 255, 255}, Align::CENTER);
+    redScoreText = new Text(redScoreObj, "0", font, {186, 90, 90, 255}, Align::CENTER);
+    blueScoreText = new Text(blueScoreObj, "0", font, {72, 114, 155, 255}, Align::CENTER);
 }
 
 void Score::increase(Player::TEAM team)

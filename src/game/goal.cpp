@@ -9,7 +9,7 @@
 Goal::Goal(Vector2 pos, Player::TEAM team) : GameObject(pos)
 {
     this->team = team;
-    AABBCollider *collider = new AABBCollider(this, Vector2(50, 250));
+    AABBCollider *collider = new AABBCollider(this, Vector2(30, 250));
     collider->isTrigger = true;
     new RigidBody(this);
 }

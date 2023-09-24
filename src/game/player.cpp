@@ -50,9 +50,9 @@ Vector2 Player::getMovementVector()
         if (this->team == RED_TEAM)
         {
             if (Input::getKey(SDL_SCANCODE_W))
-                move.y = -1;
-            if (Input::getKey(SDL_SCANCODE_S))
                 move.y = 1;
+            if (Input::getKey(SDL_SCANCODE_S))
+                move.y = -1;
             if (Input::getKey(SDL_SCANCODE_A))
                 move.x = -1;
             if (Input::getKey(SDL_SCANCODE_D))
@@ -62,9 +62,9 @@ Vector2 Player::getMovementVector()
         {
             // Arrow keys
             if (Input::getKey(SDL_SCANCODE_UP))
-                move.y = -1;
-            if (Input::getKey(SDL_SCANCODE_DOWN))
                 move.y = 1;
+            if (Input::getKey(SDL_SCANCODE_DOWN))
+                move.y = -1;
             if (Input::getKey(SDL_SCANCODE_LEFT))
                 move.x = -1;
             if (Input::getKey(SDL_SCANCODE_RIGHT))
