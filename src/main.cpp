@@ -11,6 +11,8 @@
 #include "Engine/Input.h"
 #include "Engine/Sprite.h"
 
+#include "Game/Game.h"
+
 #include "Game/Ball.h"
 #include "Game/Bound.h"
 #include "Game/Goal.h"
@@ -70,33 +72,6 @@ void render()
 
 void initGame()
 {
-    GameObject *bg = new GameObject(Vector2(0, 0));
-    new Sprite(bg, bgTexture);
-    new Ball(Vector2(0, 0), ballTexture);
-    new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
-    new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM);
-
-    // Screen
-    new Bound(Vector2(-400, 0), Vector2(0, 496));
-    new Bound(Vector2(400, 0), Vector2(0, 496));
-    new Bound(Vector2(0, -248), Vector2(800, 0));
-    new Bound(Vector2(0, 248), Vector2(800, 0));
-
-    // Left goal bounds
-    new Bound(Vector2(-390, 0), Vector2(12, 270));
-    new Bound(Vector2(-353, -125), Vector2(56, 12));
-    new Bound(Vector2(-353, 130), Vector2(56, 12));
-
-    // Right goal bounds
-    new Bound(Vector2(390, 0), Vector2(12, 270));
-    new Bound(Vector2(353, -125), Vector2(56, 12));
-    new Bound(Vector2(353, 130), Vector2(56, 12));
-
-    // Goals
-    new Goal(Vector2(-364, 0), Player::RED_TEAM);
-    new Goal(Vector2(364, 0), Player::BLUE_TEAM);
-
-    Score::init(font32);
 
     physic = new Physic();
 }
@@ -130,7 +105,7 @@ void loop()
 
 int main(int argc, char *argv[])
 {
-    initGame();
+    Game::init();
     loop();
     window.cleanUp();
     SDL_Quit();
