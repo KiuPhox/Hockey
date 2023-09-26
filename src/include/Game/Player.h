@@ -17,14 +17,13 @@ public:
     };
 
     TEAM team;
+    bool active = false;
 
     void update(float deltaTime) override;
-    void setActive(bool active);
 
-    Player(Vector2 pos, SDL_Texture *tex, TEAM team);
+    Player(Vector2 pos, SDL_Texture *tex, TEAM team, bool active = false);
 
 private:
-    bool active = false;
     RigidBody *rigidBody;
     CircleCollider *collider;
 

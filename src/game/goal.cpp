@@ -1,5 +1,6 @@
 #include "Game/Goal.h"
 #include "Game/Score.h"
+#include "Game/Game.h"
 
 #include "Engine/GameObject.h"
 #include "Engine/AABBCollider.h"
@@ -26,8 +27,6 @@ void Goal::onTrigger(GameObject *other)
         {
             Score::increase(Player::RED_TEAM);
         }
-
-        other->position = Vector2::ZERO;
-        other->getComponent<RigidBody>()->linearVelocity = Vector2::ZERO;
+        Game::reset();
     }
 }

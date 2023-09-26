@@ -11,6 +11,7 @@
 #include "Engine/Input.h"
 #include "Engine/Sprite.h"
 
+#include "Game/Game.h"
 #include "Game/Ball.h"
 #include "Game/Bound.h"
 #include "Game/Goal.h"
@@ -72,9 +73,13 @@ void initGame()
 {
     GameObject *bg = new GameObject(Vector2(0, 0));
     new Sprite(bg, bgTexture);
-    new Ball(Vector2(0, 0), ballTexture);
-    new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM);
-    new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM);
+
+    // Ball
+    Game::ball = new Ball(Vector2(0, 0), ballTexture);
+
+    // Players
+    Game::redPlayers.push_back(new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM, true));
+    Game::bluePlayers.push_back(new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM, true));
 
     // Screen
     new Bound(Vector2(-400, 0), Vector2(0, 496));

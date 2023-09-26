@@ -9,12 +9,12 @@
 const float MOVE_SPEED = 200;
 const float ROTATE_SPEED = 20;
 
-Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team) : GameObject(p_pos)
+Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team, bool active) : GameObject(p_pos)
 {
     this->name = "player";
     this->team = team;
     this->angle = (team == RED_TEAM) ? 0 : 180;
-    this->active = true;
+    this->active = active;
 
     new Sprite(this, p_tex);
 
@@ -72,9 +72,4 @@ Vector2 Player::getMovementVector()
         }
     }
     return move.Normalized();
-}
-
-void Player::setActive(bool active)
-{
-    this->active = active;
 }
