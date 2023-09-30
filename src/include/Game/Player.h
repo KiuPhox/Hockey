@@ -21,7 +21,7 @@ public:
 
     void update(float deltaTime) override;
 
-    Player(Vector2 pos, SDL_Texture *tex, TEAM team, bool active = false);
+    Player(Vector2 pos, TEAM team, bool active = false);
 
 private:
     RigidBody *rigidBody;

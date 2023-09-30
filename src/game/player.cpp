@@ -1,22 +1,25 @@
 #include "Game/Player.h"
+
 #include "Engine/CircleCollider.h"
 #include "Engine/Input.h"
 #include "Engine/GameMath.h"
 #include "Engine/Sprite.h"
+#include "Engine/AssetPreload.h"
 
 #include <iostream>
 
 const float MOVE_SPEED = 200;
 const float ROTATE_SPEED = 20;
 
-Player::Player(Vector2 p_pos, SDL_Texture *p_tex, TEAM team, bool active) : GameObject(p_pos)
+Player::Player(Vector2 pos, TEAM team, bool active) : GameObject(pos)
 {
     this->name = "player";
     this->team = team;
     this->angle = (team == RED_TEAM) ? 0 : 180;
     this->active = active;
 
-    new Sprite(this, p_tex);
+    ImageKey imageKey = team == RED_TEAM ? ImageKey::RED_PLAYER : ImageKey::BLUE_PLAYER;
+    new Sprite(this, AssetPreload::getTexture(imageKey));
 
     collider = new CircleCollider(this, 32);
 

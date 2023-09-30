@@ -6,6 +6,7 @@
 #include <SDL2/SDL_mixer.h>
 
 #include "Engine/RenderWindow.h"
+#include "Engine/AssetPreload.h"
 #include "Engine/AABBCollider.h"
 #include "Engine/Physic.h"
 #include "Engine/Input.h"
@@ -32,11 +33,6 @@ bool init()
 bool SDLinit = init();
 
 RenderWindow window("Tiny Football", 800, 496);
-
-SDL_Texture *bgTexture = window.loadTexture("assets/images/bg.png");
-SDL_Texture *ballTexture = window.loadTexture("assets/images/ball.png");
-SDL_Texture *playerRedTexture = window.loadTexture("assets/images/player_red.png");
-SDL_Texture *playerBlueTexture = window.loadTexture("assets/images/player_blue.png");
 
 SDL_Event event;
 
@@ -72,14 +68,14 @@ void render()
 void initGame()
 {
     GameObject *bg = new GameObject(Vector2(0, 0));
-    new Sprite(bg, bgTexture);
+    new Sprite(bg, AssetPreload::getTexture(ImageKey::BACKGROUND));
 
     // Ball
-    Game::ball = new Ball(Vector2(0, 0), ballTexture);
+    Game::ball = new Ball(Vector2(0, 0));
 
     // Players
-    Game::redPlayers.push_back(new Player(Vector2(-150, 0), playerRedTexture, Player::RED_TEAM, true));
-    Game::bluePlayers.push_back(new Player(Vector2(150, 0), playerBlueTexture, Player::BLUE_TEAM, true));
+    Game::redPlayers.push_back(new Player(Vector2(-150, 0), Player::RED_TEAM, true));
+    Game::bluePlayers.push_back(new Player(Vector2(150, 0), Player::BLUE_TEAM, true));
 
     // Screen
     new Bound(Vector2(-400, 0), Vector2(0, 496));
@@ -135,6 +131,7 @@ void loop()
 
 int main(int argc, char *argv[])
 {
+    AssetPreload::init(&window);
     initGame();
     loop();
     window.cleanUp();

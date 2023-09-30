@@ -1,13 +1,15 @@
 #include <iostream>
 
 #include "Game/Ball.h"
+
+#include "Engine/AssetPreload.h"
 #include "Engine/GameMath.h"
 #include "Engine/Sprite.h"
 
 const float BOUNCE_FACTOR = 100;
 const float MAX_SPEED = 1000;
 
-Ball::Ball(Vector2 p_pos, SDL_Texture *p_tex) : GameObject(p_pos)
+Ball::Ball(Vector2 pos) : GameObject(pos)
 {
     this->name = "ball";
 
@@ -17,7 +19,7 @@ Ball::Ball(Vector2 p_pos, SDL_Texture *p_tex) : GameObject(p_pos)
     this->rigidBody->friction = 0.995f;
     this->rigidBody->cor = 5;
 
-    new Sprite(this, p_tex);
+    new Sprite(this, AssetPreload::getTexture(ImageKey::BALL));
 }
 
 void Ball::update(float deltaTime)
