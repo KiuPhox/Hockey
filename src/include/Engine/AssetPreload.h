@@ -1,3 +1,5 @@
+#pragma once
+
 #include <map>
 
 #include <SDL2/SDL_image.h>
@@ -10,6 +12,8 @@ enum ImageKey
     BALL,
     RED_PLAYER,
     BLUE_PLAYER,
+    RED_ARROW,
+    BLUE_ARROW
 };
 
 class AssetPreload

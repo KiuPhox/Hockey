@@ -13,6 +13,7 @@ public:
     static Ball *ball;
 
     static void changeActivePlayer(Player::TEAM team);
+    static Player *getActivePlayer(Player::TEAM team);
     static void reset();
 
 private:

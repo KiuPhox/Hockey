@@ -17,6 +17,7 @@
 #include "Game/Bound.h"
 #include "Game/Goal.h"
 #include "Game/Score.h"
+#include "Game/Arrow.h"
 
 bool init()
 {
@@ -47,6 +48,15 @@ Input *input;
 
 void update(float deltaTime)
 {
+    if (input->getKeyDown(SDL_SCANCODE_E))
+    {
+        Game::changeActivePlayer(Player::RED_TEAM);
+    }
+    else if (input->getKeyDown(SDL_SCANCODE_RETURN))
+    {
+        Game::changeActivePlayer(Player::BLUE_TEAM);
+    }
+
     for (GameObject *gameObject : GameObject::gameObjects)
     {
         gameObject->update(deltaTime);
@@ -75,7 +85,11 @@ void initGame()
 
     // Players
     Game::redPlayers.push_back(new Player(Vector2(-150, 0), Player::RED_TEAM, true));
+    Game::redPlayers.push_back(new Player(Vector2(-250, 100), Player::RED_TEAM, false));
+    Game::redPlayers.push_back(new Player(Vector2(-250, -100), Player::RED_TEAM, false));
     Game::bluePlayers.push_back(new Player(Vector2(150, 0), Player::BLUE_TEAM, true));
+    Game::bluePlayers.push_back(new Player(Vector2(250, -100), Player::BLUE_TEAM, false));
+    Game::bluePlayers.push_back(new Player(Vector2(250, 100), Player::BLUE_TEAM, false));
 
     // Screen
     new Bound(Vector2(-400, 0), Vector2(0, 496));
@@ -96,6 +110,10 @@ void initGame()
     // Goals
     new Goal(Vector2(-364, 0), Player::RED_TEAM);
     new Goal(Vector2(364, 0), Player::BLUE_TEAM);
+
+    // Arrow
+    new Arrow(Vector2(-150, 0), Player::RED_TEAM);
+    new Arrow(Vector2(150, 0), Player::BLUE_TEAM);
 
     Score::init(font32);
 

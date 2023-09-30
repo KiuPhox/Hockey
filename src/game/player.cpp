@@ -1,3 +1,4 @@
+#include "Game/Game.h"
 #include "Game/Player.h"
 
 #include "Engine/CircleCollider.h"
@@ -31,12 +32,14 @@ Player::Player(Vector2 pos, TEAM team, bool active) : GameObject(pos)
 void Player::update(float deltaTime)
 {
     GameObject::update(deltaTime);
+
     this->move(deltaTime);
 }
 
 void Player::move(float deltaTime)
 {
     Vector2 movementVector = this->getMovementVector();
+
     this->rigidBody->linearVelocity = movementVector * MOVE_SPEED;
 
     if (!(movementVector == Vector2::ZERO))
